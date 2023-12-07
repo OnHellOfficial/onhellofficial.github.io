@@ -1,0 +1,26 @@
+name: Discord Data Sender
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get the time
+        id: time
+        run: |
+          NOW=$(date +"%r")
+          echo "now=${NOW}" >> $GITHUB_OUTPUT
+        env:
+          TZ: America/New_York
+
+      - name: Send the time
+        uses: satak/webrequest-action@master 
+        with:
+          url: ${{ secrets.DISCORD_WEBHOOK }}
+          method: POST
+          payload: '{"content": "The workflow ran at $now!"}'
