@@ -1,282 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnHell</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    
+    <style>
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #d4d4d4;
+        }
 
-  <head>
+        header {
+            background-color: #333;
+            color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 700;
+            color: #FFD700;
+        }
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        nav {
+            display: flex;
+            gap: 20px;
+        }
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        nav a {
+            text-decoration: none;
+            color: #f9f9f9;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
 
-    <title>Cyborg - Awesome HTML5 Template</title>
+        nav a i {
+            margin-right: 5px;
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        nav a:hover {
+            color: #3498db;
+        }
 
+        section {
+            padding: 20px;
+            text-align: center;
+        }
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+        .category {
+            margin-top: 40px;
+        }
 
-  </head>
+        .project-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
+        .project-button {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #d4d4d4;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #f9f9f9;
+        }
+
+        p.project-description {
+            font-size: 16px;
+            color: #d4d4d4;
+        }
+
+        img {
+    max-width: 100%;
+    height: auto;
+    border: none; /* Remove the border */
+    outline: none; /* Remove the outline */
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #e74c3c;
+        }
+
+.play-btn {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    display: block; 
+    margin: 0 auto; 
+}
+    </style>
+</head>
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Preloader End ***** -->
+<header>
+    
+    <img src="https://cdn.discordapp.com/attachments/1106196994281701418/1188158765120364574/image-removebg-preview.png?ex=65998214&is=65870d14&hm=c22df72b598c174a3244cfc812dcaa4f138196f518d3d66a5f9ae90e41f47343&" alt="Logo" style="max-width: 150px; height: auto; margin-right: 10px;">
+    <nav>
+        <a href="#projects"><i class="fas fa-code"></i> Projects</a>
+        <a href="https://onhellofficial.github.io/Showcase/admin.html"><i class="fas fa-user-shield"></i> Admin</a>
+        <a href="https://onhellofficial.github.io/Showcase/about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    </nav>
+</header>
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Search End ***** -->
-                    <div class="search-input">
-                      <form id="search" action="#">
-                        <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                        <i class="fa fa-search"></i>
-                      </form>
-                    </div>
-                    <!-- ***** Search End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <button class="DiscordInvite"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"> JOIN SERVER</button>
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
-                        <li><a href="details.html">Details</a></li>
-                        <li><a href="streams.html">Streams</a></li>
-                        <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+<section id="projects">
+    <div class="category">
+        <h2><i class="fab fa-python"></i>Python Projects</h2>
+        <div class="project-container">
+            <div class="project-button" onclick="openPopup('Python Project 1', '2023-01-01', 'Description of Python Project 1.', true)">
+                <img src="python_project_image.jpg" alt="Python Project">
+                <h3>Python Project 1</h3>
+                <p>Description of Python Project 1.</p>
             </div>
+
         </div>
     </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="page-content">
+    <div class="category">
+        <h2><i class="fas fa-globe"></i>Web Projects</h2>
+        <div class="project-container">
+            <div class="project-button" onclick="openPopup('Web Project 1', '2023-02-15', 'Description of Web Project 1.', false)">
+                <img src="web_project_image.jpg" alt="Web Project">
+                <h3>Web Project 1</h3>
+                <p>Description of Web Project 1.</p>
+            </div>
 
-          <!-- ***** Banner Start ***** -->
-          <div class="main-banner">
-            <div class="row">
-              <div class="col-lg-7">
-                <div class="header-text">
-                  <h6>Welcome To Cyborg</h6>
-                  <h4><em>Browse</em> Our Popular Games Here</h4>
-                  <div class="main-button">
-                    <a href="browse.html">Browse Now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ***** Banner End ***** -->
-
-          <!-- ***** Most Popular Start ***** -->
-          <div class="most-popular">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="heading-section">
-                  <h4><em>Most Popular</em> Right Now</h4>
-                </div>
-                <div class="row">
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-01.jpg" alt="">
-                      <h4>Fortnite<br><span>Sandbox</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-02.jpg" alt="">
-                      <h4>PubG<br><span>Battle S</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-03.jpg" alt="">
-                      <h4>Dota2<br><span>Steam-X</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-04.jpg" alt="">
-                      <h4>CS-GO<br><span>Legendary</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="item">
-                      <div class="row">
-                        <div class="col-lg-6 col-sm-6">
-                          <div class="item inner-item">
-                            <img src="assets/images/popular-05.jpg" alt="">
-                            <h4>Mini Craft<br><span>Legendary</span></h4>
-                            <ul>
-                              <li><i class="fa fa-star"></i> 4.8</li>
-                              <li><i class="fa fa-download"></i> 2.3M</li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                          <div class="item">
-                            <img src="assets/images/popular-06.jpg" alt="">
-                            <h4>Eagles Fly<br><span>Matrix Games</span></h4>
-                            <ul>
-                              <li><i class="fa fa-star"></i> 4.8</li>
-                              <li><i class="fa fa-download"></i> 2.3M</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-07.jpg" alt="">
-                      <h4>Warface<br><span>Max 3D</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="assets/images/popular-08.jpg" alt="">
-                      <h4>Warcraft<br><span>Legend</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-download"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="main-button">
-                      <a href="browse.html">Discover Popular</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ***** Most Popular End ***** -->
-
-          <!-- ***** Gaming Library Start ***** -->
-          <div class="gaming-library">
-            <div class="col-lg-12">
-              <div class="heading-section">
-                <h4><em>Your Gaming</em> Library</h4>
-              </div>
-              <div class="item">
-                <ul>
-                  <li><img src="assets/images/game-01.jpg" alt="" class="templatemo-item"></li>
-                  <li><h4>Dota 2</h4><span>Sandbox</span></li>
-                  <li><h4>Date Added</h4><span>24/08/2036</span></li>
-                  <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
-                  <li><h4>Currently</h4><span>Downloaded</span></li>
-                  <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
-                </ul>
-              </div>
-              <div class="item">
-                <ul>
-                  <li><img src="assets/images/game-02.jpg" alt="" class="templatemo-item"></li>
-                  <li><h4>Fortnite</h4><span>Sandbox</span></li>
-                  <li><h4>Date Added</h4><span>22/06/2036</span></li>
-                  <li><h4>Hours Played</h4><span>740 H 52 Mins</span></li>
-                  <li><h4>Currently</h4><span>Downloaded</span></li>
-                  <li><div class="main-border-button"><a href="#">Donwload</a></div></li>
-                </ul>
-              </div>
-              <div class="item last-item">
-                <ul>
-                  <li><img src="assets/images/game-03.jpg" alt="" class="templatemo-item"></li>
-                  <li><h4>CS-GO</h4><span>Sandbox</span></li>
-                  <li><h4>Date Added</h4><span>21/04/2036</span></li>
-                  <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
-                  <li><h4>Currently</h4><span>Downloaded</span></li>
-                  <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="main-button">
-                <a href="profile.html">View Your Library</a>
-              </div>
-            </div>
-          </div>
-          <!-- ***** Gaming Library End ***** -->
+            
         </div>
-      </div>
     </div>
-  </div>
-  
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
-          
-          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+
+    <div class="category">
+        <h2>Other Projects</h2>
+        <div class="project-container">
+            <div class="project-button" onclick="openPopup('Other Project 1', '2023-03-20', 'Description of Other Project 1.', true)">
+                <img src="other_project_image.jpg" alt="Other Project">
+                <h3>Other Project 1</h3>
+                <p>Description of Other Project 1.</p>
+            </div>
+
         </div>
-      </div>
     </div>
-  </footer>
 
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title"></h2>
+            <p id="popup-start-time"></p>
+            <p id="popup-description"></p>
+            <button class="play-btn" id="play-btn"><i class="fa-solid fa-gamepad"></i></button>
 
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        </div>
+    </div>
+</section>
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+<script>
+    function openPopup(title, startTime, description, isDone) {
+        document.getElementById('popup-title').innerHTML = title;
+        document.getElementById('popup-start-time').innerHTML = 'Started on: ' + startTime;
+        document.getElementById('popup-description').innerHTML = description;
 
+        if (isDone) {
+            document.getElementById('play-btn').style.display = 'block';
+        } else {
+            document.getElementById('play-btn').style.display = 'none';
+        }
 
-  </body>
+        document.getElementById('popup').style.display = 'flex';
+    }
 
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
+
+</body>
 </html>
