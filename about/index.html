@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    
+    <style>
+   .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #40b736;
+}
+ 
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+ 
+.nav-links li {
+    margin-right: 20px;
+}
+ 
+.nav-links a {
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+ 
+.nav-links a:hover {
+    background-color: #40b736;
+    border-radius: 4px;
+    color: white;
+}
+ 
+
+.about {
+    background: rgb(224, 251, 222);
+    background: linear-gradient(360deg, rgb(245, 255, 245) 0%, rgb(173, 252, 163) 100%);
+    padding: 100px 0 20px 0;
+    text-align: center;
+}
+ 
+.about h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+ 
+.about p {
+    font-size: 1rem;
+    color: #323030;
+    max-width: 800px;
+    margin: 0 auto;
+}
+ 
+.about-info {
+    margin: 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+}
+ 
+.about-img {
+    width: 20rem;
+    height: 20rem;
+ 
+}
+ 
+.about-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: contain;
+}
+ 
+.about-info p {
+    font-size: 1.3rem;
+    margin: 0 2rem;
+    text-align: justify;
+}
+ 
+button {
+    border: none;
+    outline: 0;
+    padding: 10px;
+    margin: 2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #40b736;
+    text-align: center;
+    cursor: pointer;
+    width: 15rem;
+    border-radius: 4px;
+}
+ 
+button:hover {
+    background-color: #1f9405;
+}
+ 
+
+.team {
+    padding: 30px 0;
+    text-align: center;
+}
+ 
+.team h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+ 
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+ 
+.card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 18rem;
+    height: 30rem;
+    margin-top: 10px;
+}
+ 
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+ 
+.card-img {
+    width: 18rem;
+    height: 18rem;
+}
+ 
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+ 
+.card-info button {
+    margin: 2rem 1rem;
+}
+ 
+.card-name {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+ 
+.card-role {
+    font-size: 1rem;
+    color: #888;
+    margin: 5px 0;
+}
+ 
+.card-email {
+    font-size: 1rem;
+    color: #555;
+}
+ 
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+ 
+@media (max-width: 768px) {
+    nav {
+        display: block;
+    }
+ 
+    .logo {
+        text-align: center;
+    }
+ 
+    .nav-links {
+        margin-top: 1rem;
+        justify-content: space-between;
+    }
+ 
+    .nav-links li {
+        margin-right: 0;
+    }
+ 
+    .about h1 {
+        font-size: 2rem;
+    }
+ 
+    .about p {
+        font-size: 0.9rem;
+    }
+ 
+    .about-info {
+        flex-direction: column;
+        text-align: center;
+    }
+ 
+    .about-img {
+        width: 60%;
+        height: 60%;
+        margin-bottom: 1rem;
+    }
+ 
+    .about-info p {
+        margin: 1rem 2rem;
+    }
+ 
+    
+ 
+    .team {
+        margin: 0 1rem;
+    }
+}
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #d4d4d4;
+        }
+
+        header {
+            background-color: #333;
+            color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #f9f9f9;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        nav a i {
+            margin-right: 5px;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+        .about-info button {
+            border: none;
+            outline: 0;
+            padding: 10px;
+            font-size: 1rem;
+            color: white;
+            background-color: #40b736;
+            text-align: center;
+            cursor: pointer;
+            width: 15rem;
+            border-radius: 4px;
+            display: block; 
+            margin: 2rem auto; 
+        }
+
+        .about-info button:hover {
+            background-color: #1f9405;
+        }
+
+        
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #d4d4d4;
+        }
+
+        header {
+            background: linear-gradient(90deg, #333, #1a1a1a);
+            color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #f9f9f9;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        nav a i {
+            margin-right: 5px;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .button {
+            border: none;
+            outline: 0;
+            padding: 10px;
+            font-size: 1rem;
+            color: white;
+            background-color: #40b736;
+            text-align: center;
+            cursor: pointer;
+            width: 15rem;
+            border-radius: 4px;
+            display: block; 
+            margin: 2rem auto; 
+        }
+
+        .button:hover {
+            background-color: #1f9405;
+        }
+
+        .team-cards .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .team-cards .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Updated styles for the "about" section */
+        .about {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: #ffffff;
+            padding: 100px 0 20px 0;
+            text-align: center;
+        }
+
+        .about h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 1rem;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-info {
+            margin: 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .about-img {
+            width: 20rem;
+            height: 20rem;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            object-fit: contain;
+        }
+
+        .about-info p {
+            font-size: 1.3rem;
+            margin: 0 2rem;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://cdn.discordapp.com/attachments/1106196994281701418/1188158765120364574/image-removebg-preview.png?ex=65998214&is=65870d14&hm=c22df72b598c174a3244cfc812dcaa4f138196f518d3d66a5f9ae90e41f47343&" alt="Logo" style="max-width: 150px; height: auto; margin-right: 10px;">
+    <nav>
+        <a href="https://onhellofficial.github.io/Showcase/"><i class="fas fa-code"></i> Projects</a>
+        <a href="https://onhellofficial.github.io/Showcase/admin/"><i class="fas fa-user-shield"></i> Admin</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+    </nav>
+</header>
+
+<section id="about" class="about">
+    <h1>About Us</h1>
+    <p style="font-weight: bold">OnHell is the future...</p>
+    <div class="about-info">
+        <div class="about-img">
+            <img src="https://cdn.discordapp.com/attachments/1106196994281701418/1188888746746191892/Icon.png?ex=659c29ed&is=6589b4ed&hm=3503b13e423858051aad04bc4ae2d450692b8b600a4f9ac93ebe174464a8c634&" alt="OnHell">
+        </div>
+        <div>
+            <p>OnHell is a company focused on giving the best products and tools which spark imagination and creativity. Projects about ethical hacking, 3d games, AI automation and not only that, but theories too.</p>
+            <button onclick="window.open('mailto:dev.hellom38.hireable@gmail.com');" class="button">Contact Us</button>
+        </div>
+    </div>
+</section>
+
+<section class="team">
+    <h1>Meet Our Team</h1>
+    <div class="team-cards">
+        <!-- Cards here -->
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-img">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="User 1">
+            </div>
+            <div class="card-info">
+                <h2 class="card-name">Jaimeloo</h2>
+                <p class="card-role">3D Modeller</p>
+                <p class="card-email">NOT GIVEN</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-img">
+                <img src="https://lh3.googleusercontent.com/fife/AGXqzDnrsqjftqf5dLK99CuJcaIbPvKnaUir6RAIjcRKaO7Bzcwq02E8Lte1FO3I05AFr7iniYGx09Yh3G14TsBZ5vKafWnDmcGi0hUjVRyoA3Kn8KDO7TbiW-oXVOY6HEjo1gW2aiZ7aBhCJYHdpBv4Mg57qiKmquO4bkNIvN0fc3Z_uA1g4-xd_00a52fX6BpK31O3bLL1dJYaYJFYMtQMBqd4GPH5WG5IkYx8P1EqzsfhfU1neU8NNsJryj_EtYfuusTLt7fjoPRElaa6IegQUAMYJ2t8k0ERVA-0_6FFIfoDGI3wnjWcB1ALNj2GXObJWr-LFBQFPJqLHUjuYC4tvdj4nh3NlJwwo3S-8PxeFZKUEYYkDJjqEUgQQMAyW_-i9sB1fprb69-9C18Pn8URyFibOYe4yeUgby60WcOj30as4e_lH6gQpQ3EELXblUPlvBwUZk0t4jAETSTSMvGn8_VXDqb-PN-q67x2s2Xf7W2PhFtI5pSJIj-HwF-MDtaX8zwzX5GrAEarcXcyI4pQnlZkwk_uyVqiBPmLl5Xyoe0GOD4nOesneyDyw6iIvd4qOmQ1FYn5fTnR5HWnW1eHqWJhPClbOqQ9VmjGyRfoMZMP3BginSFHxuPFLPhowFqQbMM0kYXy1eUbaB5TbJx2KZTtdrS2oDvZX5lLYs2jplDzlRVYw_BZoTmugHDJhc4bCQn1bPTPEqaQbp4Gm07_TkXxxRPZARJB1ciFrt6mSgrfUPsCcMeutj_RNfFyAlBc-dm_T9B0c2tEQy5FJlnHiNoW8vnwZsntlqrji1ffG6Qpl9WCj1zFANfnrRsLDCNA8EGToR1nmNHCvlsKavSrVFlhmUBTErwf23GPK9IJAUazaJl8P_s_toU5NlvXBSpCfW4752Rx4X-FDAe0rndtRkGdyQgsY21rlJ-R2jPwuxRTVZWgjytn2rWP2LJj2pyWgKdvP5reZttKBEo6dWnnipm8MAU5zQ5821G8qwNiIdPWgHf_iLZSqiijPRHAZtFdIYf1uqCIjymk5sdmv9NuT34qxuY=s124-c-no" alt="User 3">
+            </div>
+            <div class="card-info">
+                <h2 class="card-name">Hellom38</h2>
+                <p class="card-role">Founder</p>
+                <p class="card-email">dev.hellom38.hireable@gmail.com</p>
+                <p><button onclick="window.open('mailto:dev.hellom38.hireable@gmail.com');" class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2023 OnHell. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
