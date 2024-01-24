@@ -45,6 +45,14 @@
             background-color: #999999;
             color: #fff;
         }
+        .html {
+            background-color: #7B3F00;
+            color: #fff;
+        }
+		.proxies {
+            background-color: #00D8FF;
+            color: #fff;
+        }
 
         header {
             background-color: #333;
@@ -145,6 +153,18 @@
         display: block;
         margin: 0 auto; 
     }
+     .link-btn {
+        background-color: brown;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto; 
+    }
 
         img {
     max-width: 100%;
@@ -215,7 +235,7 @@
     <div class="category">
         <h2><i class="fa-solid fa-gamepad"></i>Games</h2>
         <div class="project-container">
-            <div class="project-button" onclick="openPopup('Python Project 1', '2023-01-01', 'Description of Python Project 1.', true,'')">
+            <div class="project-button" onclick="openPopup('Python Project 1', '2023-01-01', 'Description of Python Project 1.', true,'','')">
                 <img src="python_project_image.jpg" alt="Python Project">
                 <h3>Test</h3>
                 <p>Description of Python Project 1.</p>
@@ -230,14 +250,25 @@
     <div class="category">
         <h2><i class="fa-solid fa-skull"></i>Hacks</h2>
         <div class="project-container">
-            <div class="project-button" onclick="openPopup('Vtube bot', '21/01/2024', 'A bot automation program with different proxy servers to get you views on youtube, you will need to download the python file though!', false,'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/OnHellOfficial/Showcase/tree/main/hacks/Vtube')">
-                <img src="https://cdn.discordapp.com/attachments/1106196994281701418/1198605634170519592/image.png?ex=65bf837c&is=65ad0e7c&hm=3ddb19ffaf4b51ce0bcf14732764935c69c102fedc1d6de6b9c54b3208585df9&.jpg" alt="Web Project">
+            <div class="project-button" onclick="openPopup('Vtube bot', '21/01/2024', 'A bot automation program with different proxy servers to get you views on youtube, you will need to download the python file though!', false,'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/OnHellOfficial/Showcase/tree/main/hacks/Vtube','')">
+                <img src="https://github.com/OnHellOfficial/Showcase/blob/main/hacks/Vtube/Vtube_source/dist/Images/Icon.png?raw=true" alt="Web Project">
                 <h3>Vtube Bot</h3>
                 <p>Bot automation to get views on youtube.</p>
 				<div class="tags">
                 <span class="tag python"><i class="fab fa-python"></i>Python</span>
               <span class="tag hacks"><i class="fa-solid fa-skull"></i>Hacks</span>
                 <span class="tag bots"><i class="fa-solid fa-robot"></i>Bots</span>
+				</div>
+            </div>
+            <div class="project-container">
+            <div class="project-button" onclick="openPopup('SunBlockers', '21/01/2024', 'A couple of unblockers or utility hacks to make your day and also bother other people :D! including: School unblockers!', false,'','https://onhellofficial.github.io/Showcase/hacks/SunBlocker')">
+                <img src="https://github.com/OnHellOfficial/Showcase/blob/main/hacks/icon.jpg?raw=true" alt="Web Project">
+                <h3>SunBlockers</h3>
+                <p>Simple unblockers to make your day.</p>
+				<div class="tags">
+                <span class="tag html"><i class="fa-solid fa-code"></i>Html</span>
+              <span class="tag hacks"><i class="fa-solid fa-skull"></i>Hacks</span>
+                <span class="tag proxies"><i class="fa-solid fa-server"></i>Proxy</span>
 				</div>
             </div>
 
@@ -248,7 +279,7 @@
     <div class="category">
         <h2>...Other</h2>
         <div class="project-container">
-            <div class="project-button" onclick="openPopup('Other Project 1', '2023-03-20', 'Description of Other Project 1.', true,'')">
+            <div class="project-button" onclick="openPopup('Other Project 1', '2023-03-20', 'Description of Other Project 1.', true,'','')">
                 <img src="other_project_image.jpg" alt="Other Project">
                 <h3>Other Project 1</h3>
                 <p>Description of Other Project 1.</p>
@@ -265,13 +296,14 @@
             <p id="popup-description"></p>
             <button class="play-btn" id="play-btn"><i class="fa-solid fa-gamepad"></i></button>
             <button class="download-btn" id="download-btn"><i class="fas fa-download"></i></button>
+            <button class="link-btn" id="link-btn"><i class="fa-solid fa-link"></i></button>
 
         </div>
     </div>
 </section>
 
 <script>
-    function openPopup(title, startTime, description, isDone, downloadLink) {
+    function openPopup(title, startTime, description, isDone, downloadLink,isLink) {
         document.getElementById('popup-title').innerHTML = title;
         document.getElementById('popup-start-time').innerHTML = 'Started on: ' + startTime;
         document.getElementById('popup-description').innerHTML = description;
@@ -291,6 +323,16 @@
         } else {
             downloadBtn.style.display = 'none';
         }
+        
+        const linkBtn = document.getElementById('link-btn');
+        if (isLink && isLink !== "") {
+            linkBtn.style.display = 'block';
+            linkBtn.onclick = function () {
+                window.location.href = isLink;
+            };
+        } else {
+            linkBtn.style.display = 'none';
+        }
 
         document.getElementById('popup').style.display = 'flex';
     }
@@ -302,4 +344,3 @@
 
 </body>
 </html>
-
