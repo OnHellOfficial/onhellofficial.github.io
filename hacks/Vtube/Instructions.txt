@@ -1,0 +1,8 @@
+INSTRUCTIONS
+
+1. Unzip the folder by clicking on Extract all in Windows.
+
+2. Move the "Vtube_source" folder to the Program Files on the computer.
+3. Move the "Vtube" shortcut app to the Desktop for easier access.
+
+If you have any problems do contact me at dev.hellom38.hireable@gmail.com
