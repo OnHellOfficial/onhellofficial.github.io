@@ -43,7 +43,7 @@
         }
 	.tiktok {
             background-color: #FFFFFF;
-            color: #fff;
+            color: #000;
         }
 		.bots {
             background-color: #999999;
@@ -245,6 +245,18 @@
     display: block; 
     margin: 0 auto; 
 }
+	    .tiktok-btn {
+    background-color: #FFFFFF;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    display: block; 
+    margin: 0 auto; 
+}
     </style>
 </head>
 <body>
@@ -341,7 +353,8 @@
             <button class="play-btn" id="play-btn"><i class="fa-solid fa-gamepad"></i></button>
             <button class="download-btn" id="download-btn"><i class="fas fa-download"></i></button>
             <button class="link-btn" id="link-btn"><i class="fa-solid fa-link"></i></button>
-             <button class="invite-btn" id="invite-btn"><i class="fa-brands fa-discord"></i></button>
+            <button class="invite-btn" id="invite-btn"><i class="fa-brands fa-discord"></i></button>
+	    <button class="tiktok-btn" id="tiktok-btn"><i class="fa-brands fa-tiktok"></i></button>
 
         </div>
     </div>
@@ -370,11 +383,20 @@
         }
         
         const linkBtn = document.getElementById('link-btn');
+	const TikTokBtn = document.getElementById('tiktok-btn');
         if (isLink && isLink !== "") {
-            linkBtn.style.display = 'block';
+		if (isLink == "TikTok") {
+			 TikTokBtn.style.display = 'block';
+            TikTokBtn.onclick = function () {
+        	window.location.href = isLink;
+			
+		}
+		else {
+			linkBtn.style.display = 'block';
             linkBtn.onclick = function () {
-            	console.log(isInvite);
-                window.location.href = isLink;
+        	window.location.href = isLink;
+	    }
+           
             };
         } else {
             linkBtn.style.display = 'none';
