@@ -13,6 +13,9 @@
   position: relative;
 }
 
+body {
+	background-color: #808080;
+}
 .desktop .text-wrapper {
   position: absolute;
   width: 791px;
