@@ -1,0 +1,63 @@
+.desktop {
+  background-color: #808080;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop .div {
+  background-color: #ffffff;
+  width: 1440px;
+  height: 1024px;
+  position: relative;
+}
+
+.desktop .text-wrapper {
+  position: absolute;
+  width: 791px;
+  top: 53px;
+  left: 318px;
+  background: linear-gradient(
+    180deg,
+    rgb(51, 255, 0) 0%,
+    rgb(94.35, 124.95, 86.7) 99.99%,
+    rgb(102, 102, 102) 100%
+  );
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  font-family: "Anonymous Pro", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 64px;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop .hack-list-ctrl-y {
+  position: absolute;
+  width: 1061px;
+  top: 265px;
+  left: 240px;
+  font-family: "Anonymous Pro", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 64px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop .span {
+  font-family: "Anonymous Pro", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 64px;
+  letter-spacing: 0;
+}
+
+.desktop .text-wrapper-2 {
+  font-size: 32px;
+}
