@@ -22,6 +22,8 @@ window.addEventListener("keydown", event => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://onhellofficial.github.io/hacks/UHack/globals.css" />
+    <link rel="stylesheet" href="https://onhellofficial.github.io/hacks/UHack/style.css" />
     <title>Link Creator</title>
     <style>
         body {
@@ -33,6 +35,10 @@ window.addEventListener("keydown", event => {
             background-color: #f4f4f4;
         }
         .container {
+        left: 25%;
+    bottom: 0px;
+    position: absolute;
+        	
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -59,12 +65,26 @@ window.addEventListener("keydown", event => {
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="desktop">
+      <div class="div">
+        <div class="text-wrapper">New Hack by hellom38</div>
+        <p class="hack-list-ctrl-y">
+          <span class="span"
+            >Hack List:<br /><br />Ctrl + y = Inject javascript<br /><br />Ctrl + x = This page<br /><br />Ctrl + q =
+            Open console<br /><br
+          /></span>
+         
+          <span class="text-wrapper-2">More coming soon....</span>
+        </p>
+         <div class="container">
         <h2>Link Creator</h2>
         <input type="text" id="HolderlinkInput" placeholder="Holder URL(Leave blank for current page)"> <br>
         <input type="text" id="linkInput" placeholder="Enter a URL">
         <button onclick="openLink()">Go</button>
     </div>
+      </div>
+    </div>
+    
     <script>
         function openLink() {
             let url = document.getElementById('linkInput').value;
@@ -86,9 +106,7 @@ window.addEventListener("keydown", event => {
         }
     </script>
 </body>
-</html>
-
-`)
+</html>`)
   }
 });
 
