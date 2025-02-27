@@ -13,7 +13,7 @@
 	position: relative;
 }
 html, body {
-            display: block;
+            
 	    background-color: #808080;
         }
 
@@ -67,7 +67,6 @@ html, body {
 
 body {
 	font-family: Arial, sans-serif;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
