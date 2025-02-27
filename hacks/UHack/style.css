@@ -12,10 +12,14 @@
 	height: 1024px;
 	position: relative;
 }
+html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+	    background-color: #808080;
+        }
 
-body {
-	background-color: #808080;
-}
 
 .desktop .text-wrapper {
 	position: absolute;
