@@ -1159,53 +1159,67 @@
                 this.serverFatMinions = null;
                 this.switchInterface();
             }
-            ["onPacket"](isMacroFeeding) {
-                const renamedVar87 = new Uint8Array(Array.from(isMacroFeeding)).buffer;
-                const renamedVar277 = new DataView(renamedVar87);
-                let renamedVar395 = 0x0;
-                const renamedVar316 = renamedVar277.getUint8(renamedVar395);
-                renamedVar395 += 0x1;
-                if (renamedVar316 === 0x8 || renamedVar316 === 0x9) {
-                    if (
-                        this.gameModes.find((renamedVar212) => renamedVar212.type === this.gameMode)
-                    ) {
-                        this.ident = "";
-                        while (renamedVar277.getUint8(renamedVar395)) {
-                            this.ident += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+            onPacket(isMacroFeeding) {
+                const packetBuffer = new Uint8Array(Array.from(isMacroFeeding)).buffer;
+                const dataView = new DataView(packetBuffer);
+                let offset = 0x0;
+            
+                const packetType = dataView.getUint8(offset);
+                offset += 0x1;
+            
+                // Check if the packet type is either 0x8 or 0x9 (indicating a valid packet)
+                if (packetType === 0x8 || packetType === 0x9) {
+                    if (this.gameModes.find((gameMode) => gameMode.type === this.gameMode)) {
+                        this.userIdentifier = "";
+                        
+                        // Read user identifier from the packet
+                        while (dataView.getUint8(offset)) {
+                            this.userIdentifier += String.fromCharCode(dataView.getUint8(offset++));
                         }
-                        this.ident = decodeURIComponent(escape(this.ident));
-                        renamedVar395 += 0x1;
-                        this.money = renamedVar277.getUint32(renamedVar395, true);
-                        renamedVar395 += 0x4;
+                        this.userIdentifier = decodeURIComponent(escape(this.userIdentifier));
+                        offset += 0x1;
+            
+                        // Read user money
+                        this.money = dataView.getUint32(offset, true);
+                        offset += 0x4;
+            
                         this.skin = "";
-                        while (renamedVar277.getUint8(renamedVar395)) {
-                            this.skin += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+                        // Read skin from the packet
+                        while (dataView.getUint8(offset)) {
+                            this.skin += String.fromCharCode(dataView.getUint8(offset++));
                         }
                         this.skin = decodeURIComponent(escape(this.skin));
-                        renamedVar395 += 0x1;
-                        let renamedVar154 = "";
-                        while (renamedVar277.getUint8(renamedVar395)) {
-                            renamedVar154 += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+                        offset += 0x1;
+            
+                        let userDescription = "";
+                        // Read user description (e.g., "about me")
+                        while (dataView.getUint8(offset)) {
+                            userDescription += String.fromCharCode(dataView.getUint8(offset++));
                         }
-                        renamedVar154 = decodeURIComponent(escape(renamedVar154));
-                        renamedVar395 += 0x1;
-                        const maxSplitCommand = renamedVar277.getUint8(renamedVar395);
-                        renamedVar395 += 0x1;
-                        const renamedVar44 = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
-                        const renamedVar53 = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
-                        const renamedVar384 = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
-                        const renamedVar29 = renamedVar277.getUint32(renamedVar395, true);
+                        userDescription = decodeURIComponent(escape(userDescription));
+                        offset += 0x1;
+            
+                        const maxSplitCommand = dataView.getUint8(offset);
+                        offset += 0x1;
+            
+                        const loadedMinions = dataView.getUint16(offset, true);
+                        offset += 0x2;
+            
+                        const fatAmount = dataView.getUint16(offset, true);
+                        offset += 0x2;
+            
+                        const fatMass = dataView.getUint16(offset, true);
+                        offset += 0x2;
+            
+                        const minionExpireTime = dataView.getUint32(offset, true);
                         this.minions = {
-                            loaded: renamedVar44,
-                            owner: renamedVar154,
+                            loaded: loadedMinions,
+                            owner: userDescription,
                             state: maxSplitCommand,
-                            amount: renamedVar44,
-                            fatAmount: renamedVar53,
-                            fatMass: renamedVar384,
-                            expireTime: Date.now() + renamedVar29 * 0x3e8,
+                            amount: loadedMinions,
+                            fatAmount: fatAmount,
+                            fatMass: fatMass,
+                            expireTime: Date.now() + minionExpireTime * 0x3e8,
                             time: () =>
                                 Math.max(
                                     Math.ceil((this.minions.expireTime - Date.now()) / 0x3e8),
@@ -1214,38 +1228,49 @@
                             refundStart: 0x0,
                             refundEnd: 0x0,
                         };
-                        renamedVar395 += 0x4;
-                        const renamedVar268 = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
+                        offset += 0x4;
+            
+                        const friendsCount = dataView.getUint16(offset, true);
+                        offset += 0x2;
                         this.friends = [];
-                        for (let renamedVar305 = 0x0; renamedVar305 < renamedVar268; renamedVar305++) {
-                            let renamedVar64 = "";
-                            while (renamedVar277.getUint8(renamedVar395)) {
-                                renamedVar64 += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+            
+                        // Read friends' names
+                        for (let i = 0x0; i < friendsCount; i++) {
+                            let friendName = "";
+                            while (dataView.getUint8(offset)) {
+                                friendName += String.fromCharCode(dataView.getUint8(offset++));
                             }
-                            renamedVar64 = decodeURIComponent(escape(renamedVar64));
-                            this.friends.push(renamedVar64);
-                            renamedVar395 += 0x1;
+                            friendName = decodeURIComponent(escape(friendName));
+                            this.friends.push(friendName);
+                            offset += 0x1;
                         }
-                        const minionDoubleSplit = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
+            
+                        const ownedSkinsCount = dataView.getUint16(offset, true);
+                        offset += 0x2;
                         this.ownedSkins = [];
-                        for (let renamedVar218 = 0x0; renamedVar218 < minionDoubleSplit; renamedVar218++) {
-                            let renamedVar33 = "";
-                            while (renamedVar277.getUint8(renamedVar395)) {
-                                renamedVar33 += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+            
+                        // Read owned skins
+                        for (let i = 0x0; i < ownedSkinsCount; i++) {
+                            let skinName = "";
+                            while (dataView.getUint8(offset)) {
+                                skinName += String.fromCharCode(dataView.getUint8(offset++));
                             }
-                            renamedVar33 = decodeURIComponent(escape(renamedVar33));
-                            this.ownedSkins.push(renamedVar33);
-                            renamedVar395 += 0x1;
+                            skinName = decodeURIComponent(escape(skinName));
+                            this.ownedSkins.push(skinName);
+                            offset += 0x1;
                         }
+            
                         this.isLogged = true;
                         this.isAuthSent = true;
+            
+                        // Send data to the mobile client
                         window.core.proxyMobileData(
                             new Uint8Array([!!window[this.defaultProfile] + 0x30]),
                         );
                         this.loadSkin(this.skin);
                         clearInterval(this.listenLoop);
+            
+                        // Set up a listener for minion expiration
                         if (this.minions.time() > 0x0) {
                             this.listenLoop = setInterval(() => {
                                 if (this.minions.time() <= 0x0) {
@@ -1255,52 +1280,57 @@
                                 this.updateInterface(true);
                             }, 0x3e8);
                         }
-                        const renamedVar309 = renamedVar277.getUint16(renamedVar395, true);
-                        renamedVar395 += 0x2;
-                        for (let renamedVar36 = 0x0; renamedVar36 < renamedVar309; renamedVar36++) {
-                            let renamedVar54 = "";
-                            while (renamedVar277.getUint8(renamedVar395)) {
-                                renamedVar54 += String.fromCharCode(renamedVar277.getUint8(renamedVar395++));
+            
+                        // Read and update tournament data
+                        const tournamentCount = dataView.getUint16(offset, true);
+                        offset += 0x2;
+            
+                        for (let i = 0x0; i < tournamentCount; i++) {
+                            let tournamentData = "";
+                            while (dataView.getUint8(offset)) {
+                                tournamentData += String.fromCharCode(dataView.getUint8(offset++));
                             }
-                            renamedVar54 = decodeURIComponent(escape(renamedVar54));
-                            const renamedVar221 = renamedVar54.split(":");
-                            const renamedVar137 = this.settings.find(
-                                (canvasWidth) => canvasWidth.ident === renamedVar221[0x0],
+                            tournamentData = decodeURIComponent(escape(tournamentData));
+            
+                            const tournamentDetails = tournamentData.split(":");
+                            const setting = this.settings.find(
+                                (setting) => setting.ident === tournamentDetails[0x0],
                             );
-                            if (renamedVar137) {
-                                const renamedVar184 = JSON.parse(JSON.stringify(renamedVar137));
-                                renamedVar137.value = renamedVar221[0x1];
-                                if (renamedVar137.ident === "connection") {
-                                    localStorage.setItem(
-                                        renamedVar137.ident,
-                                        JSON.stringify(renamedVar137),
-                                    );
-                                    if (renamedVar137.value !== renamedVar184.value) {
+                            if (setting) {
+                                const previousSetting = JSON.parse(JSON.stringify(setting));
+                                setting.value = tournamentDetails[0x1];
+                                if (setting.ident === "connection") {
+                                    localStorage.setItem(setting.ident, JSON.stringify(setting));
+                                    if (setting.value !== previousSetting.value) {
                                         this.changeGameMode("ffa", false);
                                     }
                                 }
                             }
-                            renamedVar395 += 0x1;
+                            offset += 0x1;
                         }
+            
                         this.tournamentMode = "";
-                        while (renamedVar277.getUint8(renamedVar395)) {
-                            this.tournamentMode += String.fromCharCode(
-                                renamedVar277.getUint8(renamedVar395++),
-                            );
+                        // Read tournament mode data
+                        while (dataView.getUint8(offset)) {
+                            this.tournamentMode += String.fromCharCode(dataView.getUint8(offset++));
                         }
                         this.tournamentMode = decodeURIComponent(escape(this.tournamentMode));
-                        renamedVar395 += 0x1;
-                        const renamedVar210 = renamedVar277.getUint32(renamedVar395, true);
-                        renamedVar395 += 0x4;
-                        const renamedVar67 = renamedVar277.getUint32(renamedVar395, true);
-                        this.minions.refundStart = renamedVar210;
-                        this.minions.refundEnd = renamedVar67;
-                        renamedVar395 += 0x4;
-                        this.serverFatMinions = !!renamedVar277.getUint8(renamedVar395);
+                        offset += 0x1;
+            
+                        const tournamentStartTime = dataView.getUint32(offset, true);
+                        offset += 0x4;
+                        const tournamentEndTime = dataView.getUint32(offset, true);
+                        this.minions.refundStart = tournamentStartTime;
+                        this.minions.refundEnd = tournamentEndTime;
+                        offset += 0x4;
+            
+                        // Check if the server supports fat minions
+                        this.serverFatMinions = !!dataView.getUint8(offset);
                         this.updateInterface();
                         return null;
                     }
-                    this.ident = null;
+            
+                    this.userIdentifier = null;
                     this.money = null;
                     this.skin = null;
                     this.minions = {
@@ -1325,103 +1355,75 @@
                     clearInterval(this.listenLoop);
                     this.updateInterface();
                 } else {
-                    if (renamedVar316 === 0xa) {
-                        if (
-                            this.gameModes.find((renamedVar75) => renamedVar75.type === this.gameMode)
-                        ) {
+                    if (packetType === 0xa) {
+                        if (this.gameModes.find((gameMode) => gameMode.type === this.gameMode)) {
                             location.reload();
                             return null;
                         }
                     } else {
-                        if (renamedVar316 === 0xb) {
-                            if (
-                                this.gameModes.find(
-                                    (renamedVar289) => renamedVar289.type === this.gameMode,
-                                )
-                            ) {
-                                return new Uint8Array([
-                                    0x8, 0x1, 0x12, 0x7, 0x8, 0x14, 0xa2, 0x1, 0x2, 0x8, 0x3,
-                                ]);
+                        if (packetType === 0xb) {
+                            if (this.gameModes.find((gameMode) => gameMode.type === this.gameMode)) {
+                                return new Uint8Array([0x8, 0x1, 0x12, 0x7, 0x8, 0x14, 0xa2, 0x1, 0x2, 0x8, 0x3]);
                             }
                         } else {
-                            if (renamedVar316 === 0xe) {
-                                this.tournament.time = renamedVar277.getUint32(renamedVar395, true);
-                                renamedVar395 += 0x4;
+                            if (packetType === 0xe) {
+                                this.tournament.time = dataView.getUint32(offset, true);
+                                offset += 0x4;
                                 this.tournament.message = "";
-                                while (renamedVar277.getUint8(renamedVar395)) {
-                                    this.tournament.message += String.fromCharCode(
-                                        renamedVar277.getUint8(renamedVar395++),
-                                    );
+                                while (dataView.getUint8(offset)) {
+                                    this.tournament.message += String.fromCharCode(dataView.getUint8(offset++));
                                 }
-                                this.tournament.message = decodeURIComponent(
-                                    escape(this.tournament.message),
-                                );
-                                renamedVar395 += 0x1;
-                                this.tournament.alive = renamedVar277.getUint32(renamedVar395, true);
-                                renamedVar395 += 0x4;
-                                this.tournament.dead = renamedVar277.getUint32(renamedVar395, true);
+                                this.tournament.message = decodeURIComponent(escape(this.tournament.message));
+                                offset += 0x1;
+                                this.tournament.alive = dataView.getUint32(offset, true);
+                                offset += 0x4;
+                                this.tournament.dead = dataView.getUint32(offset, true);
                                 return null;
                             } else {
-                                if (renamedVar316 === 0xc) {
-                                    this.tournament.time = renamedVar277.getUint32(renamedVar395, true);
-                                    renamedVar395 += 0x4;
+                                if (packetType === 0xc) {
+                                    this.tournament.time = dataView.getUint32(offset, true);
+                                    offset += 0x4;
                                     this.tournament.message = "";
-                                    while (renamedVar277.getUint8(renamedVar395)) {
-                                        this.tournament.message += String.fromCharCode(
-                                            renamedVar277.getUint8(renamedVar395++),
-                                        );
+                                    while (dataView.getUint8(offset)) {
+                                        this.tournament.message += String.fromCharCode(dataView.getUint8(offset++));
                                     }
-                                    this.tournament.message = decodeURIComponent(
-                                        escape(this.tournament.message),
-                                    );
-                                    renamedVar395 += 0x1;
+                                    this.tournament.message = decodeURIComponent(escape(this.tournament.message));
+                                    offset += 0x1;
                                     this.tournament.team1Tag = "";
-                                    while (renamedVar277.getUint8(renamedVar395)) {
-                                        this.tournament.team1Tag += String.fromCharCode(
-                                            renamedVar277.getUint8(renamedVar395++),
-                                        );
+                                    while (dataView.getUint8(offset)) {
+                                        this.tournament.team1Tag += String.fromCharCode(dataView.getUint8(offset++));
                                     }
-                                    this.tournament.team1Tag = decodeURIComponent(
-                                        escape(this.tournament.team1Tag),
-                                    );
-                                    renamedVar395 += 0x1;
-                                    this.tournament.team1Score = Math.round(
-                                        renamedVar277.getFloat32(renamedVar395, true),
-                                    );
-                                    renamedVar395 += 0x4;
-                                    this.tournament.team1Color = renamedVar277.getUint8(renamedVar395);
-                                    renamedVar395 += 0x1;
+                                    this.tournament.team1Tag = decodeURIComponent(escape(this.tournament.team1Tag));
+                                    offset += 0x1;
+                                    this.tournament.team1Score = Math.round(dataView.getFloat32(offset, true));
+                                    offset += 0x4;
+                                    this.tournament.team1Color = dataView.getUint8(offset);
+                                    offset += 0x1;
                                     this.tournament.team2Tag = "";
-                                    while (renamedVar277.getUint8(renamedVar395)) {
-                                        this.tournament.team2Tag += String.fromCharCode(
-                                            renamedVar277.getUint8(renamedVar395++),
-                                        );
+                                    while (dataView.getUint8(offset)) {
+                                        this.tournament.team2Tag += String.fromCharCode(dataView.getUint8(offset++));
                                     }
-                                    this.tournament.team2Tag = decodeURIComponent(
-                                        escape(this.tournament.team2Tag),
-                                    );
-                                    renamedVar395 += 0x1;
-                                    this.tournament.team2Score = Math.round(
-                                        renamedVar277.getFloat32(renamedVar395, true),
-                                    );
-                                    renamedVar395 += 0x4;
-                                    this.tournament.team2Color = renamedVar277.getUint8(renamedVar395);
+                                    this.tournament.team2Tag = decodeURIComponent(escape(this.tournament.team2Tag));
+                                    offset += 0x1;
+                                    this.tournament.team2Score = Math.round(dataView.getFloat32(offset, true));
+                                    offset += 0x4;
+                                    this.tournament.team2Color = dataView.getUint8(offset);
                                     return null;
                                 } else {
-                                    if (renamedVar316 === 0xd) {
-                                        this.survivorCoins = renamedVar277.getInt32(renamedVar395, true);
+                                    if (packetType === 0xd) {
+                                        this.survivorCoins = dataView.getInt32(offset, true);
                                         return null;
                                     } else {
-                                        if (renamedVar316 === 0xf) {
-                                            const renamedVar228 = window.MiniclipAPI.prototype.getUserId();
-                                            const renamedVar348 = new Uint8Array([
+                                        if (packetType === 0xf) {
+                                            const userId = window.MiniclipAPI.prototype.getUserId();
+                                            const userData = new Uint8Array([
                                                 0x2,
-                                                ...unescape(encodeURIComponent(renamedVar228))
-                                                .split("")
-                                                .map((renamedVar397) => renamedVar397.charCodeAt(0x0)),
+                                                ...unescape(encodeURIComponent(userId))
+                                                    .split("")
+                                                    .map((char) => char.charCodeAt(0x0)),
                                                 0x0,
                                             ]);
-                                            window.core.proxyMobileData(renamedVar348);
+                                            window.core.proxyMobileData(userData);
                                             return null;
                                         }
                                     }
@@ -1432,6 +1434,7 @@
                 }
                 return isMacroFeeding;
             }
+            
             ["onMouseX"](renamedVar104) {
                 if (this.isPlayerStopped) {
                     return window.innerWidth / 0x2;
